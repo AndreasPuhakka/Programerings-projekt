@@ -12,10 +12,11 @@ gameCanvas.width = SCREENWIDTH;
 let playerX = 500;
 let playerY = 700;
 let playerWidth = 100;
-let playerHeight = 160;
+let playerHeight = 120;
 let dx = 3;
 let dy = 0; // initial vertical velocity
 const gravity = 0.15; // gravitational force
+const moving = 1;
 
 let directions = {
 left: false,
@@ -80,6 +81,7 @@ function animate() {
     c.drawImage(img, playerX, playerY, playerWidth, playerHeight)
 
     dy += gravity;
+    
 
     if (directions.right) {
         playerX += dx;
@@ -96,6 +98,7 @@ function animate() {
     }
 
     playerY += dy;
+    playerX -= dx/4;
 
     if (playerY + playerHeight > SCREENHEIGHT) {
         playerY = SCREENHEIGHT - playerHeight;
@@ -106,7 +109,13 @@ function animate() {
     //     playerX = -playerWidth
     //     gameCanvas.style.background = "url('media/stad.png') no-repeat"
     // }
+    // if (playerX + playerWidth/2 < 0) {
+    //     alert("GAME OVER")
+    //     gameCanvas.style.animation = ("back 0s infinite linear")
+    //     playerX = 500
+    //     gameCanvas.style.animation = ("back 8s infinite linear")
 
+    // }
 
 }
 
