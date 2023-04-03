@@ -96,8 +96,24 @@ canvas {
 
 /* --------------------------------------------------------------------------------------- */
 
+.musicdiv {
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  bottom: 85px;
+  left: 40px;
 
+}
 
+.music {
+  width: 100%;
+  position: absolute;
+  z-index: 12;
+}
+
+#unmuted {
+  display: none;
+}
 
 
 
