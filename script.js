@@ -7,7 +7,9 @@ let c = gameCanvas.getContext("2d"); // Drawing object
 gameCanvas.height = SCREENHEIGHT;
 gameCanvas.width = SCREENWIDTH;
 let gameover = document.getElementById("gameover")
-
+let start = document.getElementById("start")
+let siffra = document.getElementById("siffra")
+let tryagain = document.getElementById("tryagain")
 // -------------------------------------
 // Player variables
 let playerX = 500;
@@ -31,10 +33,6 @@ let img = new Image();
 img.onload = function(){
 };
 img.src="media/apa.png"
-
-
-
-
 
 
 
@@ -73,13 +71,41 @@ break;
 }
 });
 
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------FUNKTIONER-------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+// ------------------------------------------------
+// ---------------Stop Function-----------------
+
+function stanna() {
+    dx=0
+    dy=0
+}
+
+
+
+// ---------------------------------------------
+// ------------ Wait function --------------------
+
+function delay(milliseconds){
+    return new Promise(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
+
+
 // -------------------------------------
 // ------------ Animation ------------
-function animate() {
+async function animate() {
     requestAnimationFrame(animate); 
 
     c.clearRect(0, 0, gameCanvas.width, gameCanvas.height); 
     c.drawImage(img, playerX, playerY, playerWidth, playerHeight)
+
+    
 
     dy += gravity;
     
@@ -111,19 +137,45 @@ function animate() {
     //     gameCanvas.style.background = "url('media/stad.png') no-repeat"
     // }
     if (playerX + playerWidth/2 < 0) {
-        gameover.style.display = ("block")
-        playerX -= 0;
         gameCanvas.style.animation = ("back 0s infinite linear")
-        
+        gameover.style.display = ("block")
+        stanna()
+        tryagain.style.display = ("flex")
+        tryagain.onclick = function() {countdown()};
 
     }
 
 }
 
-function game() {
 
+async function countdown() {
+    start.style.display = ("none")
+    siffra.innerHTML = "3"  
+    siffra.style.display = ("block")
+
+    await delay(1000);
+
+    siffra.innerHTML = "2"
+
+    await delay(1000);
+
+    siffra.innerHTML = "1"
+
+    await delay(1000);
+
+    siffra.innerHTML = "0"
+
+    await delay(1000);
+    
+    siffra.style.display = ("none")
+    animate()
 }
 
+
+
+function game() {
+    start.onclick = function() {countdown()};
+}
 
 
 
@@ -131,4 +183,4 @@ function game() {
 
 // -------------------------------------
 // ------------ Start game ------------
-animate();
+console.log(game())
