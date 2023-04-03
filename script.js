@@ -15,7 +15,7 @@ let playerWidth = 30;
 let playerHeight = 60;
 let dx = 12;
 let dy = 0; // initial vertical velocity
-const gravity = 0.5; // gravitational force
+const gravity = 1; // gravitational force
 
 let directions = {
 left: false,
@@ -23,6 +23,11 @@ right: false,
 up: false,
 down: false,
 };
+
+
+
+
+
 
 
 // -------------------------------------
@@ -73,9 +78,11 @@ function animate() {
 
     if (directions.right) {
     playerX += dx;
-    if (playerX + playerWidth >= SCREENWIDTH) {
-        playerX = SCREENWIDTH - playerWidth;
-    }
+        
+
+    // if (playerX + playerWidth >= SCREENWIDTH) {
+    //     playerX = SCREENWIDTH - playerWidth;
+    // }
     }
 
     if (directions.left) {
@@ -100,6 +107,8 @@ playerY = SCREENHEIGHT - playerHeight;
 dy = 0; // reset the vertical velocity to zero when the player lands
 }
 }
+
+
 
 // -------------------------------------
 // ------------ Start game ------------
