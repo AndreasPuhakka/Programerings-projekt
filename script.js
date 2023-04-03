@@ -9,13 +9,13 @@ gameCanvas.width = SCREENWIDTH;
 
 // -------------------------------------
 // Player variables
-let playerX = 100;
+let playerX = 500;
 let playerY = 700;
-let playerWidth = 30;
-let playerHeight = 60;
-let dx = 12;
+let playerWidth = 100;
+let playerHeight = 160;
+let dx = 3;
 let dy = 0; // initial vertical velocity
-const gravity = 1; // gravitational force
+const gravity = 0.15; // gravitational force
 
 let directions = {
 left: false,
@@ -27,9 +27,11 @@ down: false,
 
 let img = new Image();
 img.onload = function(){
-
 };
-img.src="apa.png"
+img.src="media/apa.png"
+
+
+
 
 
 
@@ -72,45 +74,44 @@ break;
 // -------------------------------------
 // ------------ Animation ------------
 function animate() {
-    requestAnimationFrame(animate); // Run gameloop recursively
-    c.clearRect(0, 0, gameCanvas.width, gameCanvas.height); // Clear screen
+    requestAnimationFrame(animate); 
 
-    // c.fillRect(playerX, playerY, playerWidth, playerHeight); // Draw player
-    c.drawImage(img, playerX-150, playerY-150, playerWidth+150, playerHeight+150)
-    // Apply gravity to vertical velocity
+    c.clearRect(0, 0, gameCanvas.width, gameCanvas.height); 
+    c.drawImage(img, playerX, playerY, playerWidth, playerHeight)
+
     dy += gravity;
 
     if (directions.right) {
-    playerX += dx;
-        
-
-    // if (playerX + playerWidth >= SCREENWIDTH) {
-    //     playerX = SCREENWIDTH - playerWidth;
-    // }
+        playerX += dx;
     }
 
     if (directions.left) {
-    playerX -= dx;
+        playerX -= dx;
     }
 
     if (directions.up) {
-    // Only allow jumping if the player is on the ground
-    if (playerY + playerHeight >= SCREENHEIGHT) {
-    dy = -12; // set the vertical velocity to a negative value to jump
+        if (playerY + playerHeight >= SCREENHEIGHT) {
+            dy = -10;
+        }
     }
 
-    
+    playerY += dy;
+
+    if (playerY + playerHeight > SCREENHEIGHT) {
+        playerY = SCREENHEIGHT - playerHeight;
+        dy = 0;
+    }
+
+    // if (playerX - playerWidth/2 > SCREENWIDTH) {
+    //     playerX = -playerWidth
+    //     gameCanvas.style.background = "url('media/stad.png') no-repeat"
+    // }
+
+
 }
 
-// Apply vertical velocity to player position
-playerY += dy;
 
-// Keep the player within the bounds of the screen
-if (playerY + playerHeight > SCREENHEIGHT) {
-playerY = SCREENHEIGHT - playerHeight;
-dy = 0; // reset the vertical velocity to zero when the player lands
-}
-}
+
 
 
 
