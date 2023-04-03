@@ -25,7 +25,11 @@ down: false,
 };
 
 
+let img = new Image();
+img.onload = function(){
 
+};
+img.src="apa.png"
 
 
 
@@ -71,8 +75,8 @@ function animate() {
     requestAnimationFrame(animate); // Run gameloop recursively
     c.clearRect(0, 0, gameCanvas.width, gameCanvas.height); // Clear screen
 
-    c.fillRect(playerX, playerY, playerWidth, playerHeight); // Draw player
-
+    // c.fillRect(playerX, playerY, playerWidth, playerHeight); // Draw player
+    c.drawImage(img, playerX-150, playerY-150, playerWidth+150, playerHeight+150)
     // Apply gravity to vertical velocity
     dy += gravity;
 
