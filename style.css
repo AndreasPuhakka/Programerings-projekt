@@ -23,7 +23,7 @@ body {
 canvas {
   width: 100%;
   height: 85vh;
-  z-index: 100;
+  z-index: 10;
   background: url("Media/Apsving.io.png");
   background-repeat: repeat-x;
   animation: back 200s infinite linear ;
@@ -32,12 +32,30 @@ canvas {
 .background {
 }
 
+.gameover {
+  width: 0px;
+  z-index: 11;
+  position: fixed;
+  display: none;
+  animation: front 3s;
+}
+
+
 
 @keyframes back {
   0% {
     background-position: 0%;
   }
   100% {
-    background-position: -4000%;
+    background-position: -1800%;
+  }
+}
+
+@keyframes front {
+  0% {
+    width: 0px;
+  }
+  100% {
+    width: 500px;
   }
 }

@@ -6,6 +6,7 @@ let gameCanvas = document.getElementById("gameCanvas");
 let c = gameCanvas.getContext("2d"); // Drawing object
 gameCanvas.height = SCREENHEIGHT;
 gameCanvas.width = SCREENWIDTH;
+let gameover = document.getElementById("gameover")
 
 // -------------------------------------
 // Player variables
@@ -109,13 +110,17 @@ function animate() {
     //     playerX = -playerWidth
     //     gameCanvas.style.background = "url('media/stad.png') no-repeat"
     // }
-    // if (playerX + playerWidth/2 < 0) {
-    //     alert("GAME OVER")
-    //     gameCanvas.style.animation = ("back 0s infinite linear")
-    //     playerX = 500
-    //     gameCanvas.style.animation = ("back 8s infinite linear")
+    if (playerX + playerWidth/2 < 0) {
+        gameover.style.display = ("block")
+        playerX -= 0;
+        gameCanvas.style.animation = ("back 0s infinite linear")
+        
 
-    // }
+    }
+
+}
+
+function game() {
 
 }
 
