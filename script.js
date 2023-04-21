@@ -22,6 +22,8 @@ let dy = 0; // initial vertical velocity
 const gravity = 0.45; // gravitational force
 const moving = 1;
 
+let hasDoubleJumped = false
+
 let directions = {
   left: false,
   right: false,
@@ -36,7 +38,9 @@ img.src = "media/apa.png";
 // -------------------------------------
 // ------------ Player movement ------------
 
+
 document.addEventListener("keydown", (e) => {
+  if (e.repeat) return;
   switch (e.key) {
     case "a":
       directions.left = true;
@@ -46,6 +50,15 @@ document.addEventListener("keydown", (e) => {
       break;
     case " ":
       directions.up = true;
+      if (playerY + playerHeight >= SCREENHEIGHT) {
+        dy = -10;
+      } else if (hasDoubleJumped == false && playerY + playerHeight < SCREENHEIGHT) {
+        console.log(innerHeight)
+        console.log(playerY)
+        console.log("And")
+        dy = -10;
+        hasDoubleJumped = true
+      }
       break;
     default:
       break;
@@ -97,7 +110,13 @@ async function animate() {
   c.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
   c.drawImage(img, playerX, playerY, playerWidth, playerHeight);
 
+  playerY += dy;
+  playerX -= dx / 4;
+
+  
   dy += gravity;
+
+  // ----------- Spelarens horisontella rörelser -------------------------
 
   if (directions.right) {
     playerX += dx;
@@ -107,19 +126,24 @@ async function animate() {
     playerX -= dx;
   }
 
-  if (directions.up) {
-    if (playerY + playerHeight >= SCREENHEIGHT) {
-      dy = -10;
-    }
-  }
 
-  playerY += dy;
-  playerX -= dx / 4;
+
+
+  // -------- Hoppfunktion / Dubbelhopp funktion ---------------
+
+  if (directions.up) {
+    
+  }
 
   if (playerY + playerHeight > SCREENHEIGHT) {
     playerY = SCREENHEIGHT - playerHeight;
     dy = 0;
+    hasDoubleJumped = false
   }
+
+  // ------------------------------------------------------------
+
+  
 
   // if (playerX - playerWidth/2 > SCREENWIDTH) {
   //     playerX = +playerWidth
@@ -162,6 +186,9 @@ function game() {
     countdown();
   };
 }
+
+
+
 
 // -------------------------------------
 // ------------ Start game ------------
