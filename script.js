@@ -13,13 +13,13 @@ let tryagain = document.getElementById("tryagain");
 
 // -------------------------------------
 // Player variables
-let playerX = 500;
-let playerY = 700;
 let playerWidth = 100;
-let playerHeight = 120;
-let dx = 3;
+let playerHeight = 130;
+let playerX = 500;
+let playerY = SCREENHEIGHT-playerHeight;
+let dx = 12;
 let dy = 0; // initial vertical velocity
-const gravity = 0.15; // gravitational force
+const gravity = 0.45; // gravitational force
 const moving = 1;
 
 let directions = {
@@ -122,7 +122,7 @@ async function animate() {
   }
 
   // if (playerX - playerWidth/2 > SCREENWIDTH) {
-  //     playerX = -playerWidth
+  //     playerX = +playerWidth
   //     gameCanvas.style.background = "url('media/stad.png') no-repeat"
   // }
   if (playerX + playerWidth / 2 < 0) {
@@ -130,6 +130,7 @@ async function animate() {
     gameover.style.display = "block";
     stanna();
     tryagain.style.display = "flex";
+    
   }
 }
 
@@ -148,7 +149,7 @@ async function countdown() {
 
   await delay(1000);
 
-  siffra.innerHTML = "0";
+  siffra.innerHTML = "GO!";
 
   await delay(1000);
 
