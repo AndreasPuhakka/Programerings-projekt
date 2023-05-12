@@ -62,6 +62,14 @@ canvas {
   color: black;
 }
 
+#WASD {
+  width: 500px;
+  z-index: 10000;
+  position: fixed;
+  display: absolute;
+  margin-top: 450px;
+}
+
 .tryagain {
   width: 235px;
   height: 80px;

@@ -10,6 +10,7 @@ let gameover = document.getElementById("gameover");
 let start = document.getElementById("start");
 let siffra = document.getElementById("siffra");
 let tryagain = document.getElementById("tryagain");
+let wasd = document.getElementById("WASD")
 
 // -------------------------------------
 // Player variables
@@ -39,12 +40,39 @@ img.src = "media/apa.png";
 // ------------ Player movement ------------
 
 
+// ------------- Ducka ------------------
+
+document.addEventListener("keypress", (e) =>{
+  if (e.repeat) return;
+  switch (e.key) { 
+    case "ArrowDown":
+      directions.down = true;
+      break
+  }
+})
+
+// -----Keydown------------------------
+
+
 document.addEventListener("keydown", (e) => {
   if (e.repeat) return;
   switch (e.key) {
     case "a":
       directions.left = true;
       break;
+
+    case "ArrowLeft":
+      directions.left = true;
+      break;
+    case "ArrowRight":
+      directions.right = true;
+      break
+
+
+    
+
+
+
     case "d":
       directions.right = true;
       break;
@@ -60,10 +88,26 @@ document.addEventListener("keydown", (e) => {
         hasDoubleJumped = true
       }
       break;
+
+    case "ArrowUp":
+      directions.up = true;
+      if (playerY + playerHeight >= SCREENHEIGHT) {
+        dy = -10;
+      } else if (hasDoubleJumped == false && playerY + playerHeight < SCREENHEIGHT) {
+        console.log(innerHeight)
+        console.log(playerY)
+        console.log("And")
+        dy = -10;
+        hasDoubleJumped = true
+      }
+      break;
+
     default:
       break;
   }
 });
+
+
 
 document.addEventListener("keyup", (e) => {
   switch (e.key) {
@@ -73,6 +117,21 @@ document.addEventListener("keyup", (e) => {
     case "d":
       directions.right = false;
       break;
+
+    case "ArrowLeft":
+      directions.left = false;
+      break;
+    case "ArrowRight":
+      directions.right = false;
+      break
+
+
+    case "ArrowDown":
+      directions.down = false;
+      break
+
+
+
     case " ":
       directions.up = false;
       break;
@@ -126,6 +185,10 @@ async function animate() {
     playerX -= dx;
   }
 
+  if (directions.down) {
+    playerHeight =- 5
+  }
+
 
 
 
@@ -160,6 +223,7 @@ async function animate() {
 
 async function countdown() {
   start.style.display = "none";
+  wasd.style.display = "none"
   siffra.innerHTML = "3";
   siffra.style.display = "block";
 
