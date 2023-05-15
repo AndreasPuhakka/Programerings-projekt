@@ -36,6 +36,30 @@ let img = new Image();
 img.onload = function () {};
 img.src = "media/apa.png";
 
+function Init() {
+  sten3 = document.getElementById("sten3");
+  spaceW = SCREENHEIGHT - sten3.height;
+  spaceH = SCREENWIDTH - sten3.width;
+
+  moveIt();
+}
+
+
+function moveIt() {
+  var canvasRect = gameCanvas.getBoundingClientRect();
+  var canvasTop = canvasRect.top;
+  var canvasLeft = canvasRect.left;
+
+  var sten3Rect = sten3.getBoundingClientRect();
+  var sten3Width = sten3Rect.width;
+  
+  var randomX = Math.round(Math.random() * (SCREENWIDTH - sten3Width));
+  var randomY = canvasTop-15;
+
+  sten3.style.top = randomY + "px";
+  sten3.style.left = randomX + "px";
+}
+
 // -------------------------------------
 // ------------ Player movement ------------
 
@@ -76,7 +100,7 @@ document.addEventListener("keydown", (e) => {
     case "d":
       directions.right = true;
       break;
-    case " ":
+    case "w":
       directions.up = true;
       if (playerY + playerHeight >= SCREENHEIGHT) {
         dy = -10;
@@ -165,12 +189,14 @@ function delay(milliseconds) {
 // ------------ Animation ------------
 async function animate() {
   requestAnimationFrame(animate);
+  sten3.style.display = "block"
 
   c.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
   c.drawImage(img, playerX, playerY, playerWidth, playerHeight);
 
   playerY += dy;
   playerX -= dx / 4;
+
 
   
   dy += gravity;
@@ -212,6 +238,8 @@ async function animate() {
   //     playerX = +playerWidth
   //     gameCanvas.style.background = "url('media/stad.png') no-repeat"
   // }
+
+
   if (playerX + playerWidth / 2 < 0) {
     gameCanvas.style.animation = "back 0s infinite linear";
     gameover.style.display = "block";

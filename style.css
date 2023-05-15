@@ -96,6 +96,11 @@ canvas {
   color: yellow;
 }
 
+.sten {
+  position: fixed;
+  display: none;
+}
+
 /* Tagen av intrenet men fattar vad den gör */
 
 .noselect {
@@ -109,24 +114,6 @@ canvas {
 }
 
 /* --------------------------------------------------------------------------------------- */
-
-.musicdiv {
-  width: 55px;
-  height: 55px;
-  position: absolute;
-  bottom: 85px;
-  left: 40px;
-}
-
-.music {
-  width: 100%;
-  position: absolute;
-  z-index: 12;
-}
-
-#unmuted {
-  display: none;
-}
 
 /* Animations --------------------------------------------------------------------------------------- */
 
